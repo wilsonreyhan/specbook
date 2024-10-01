@@ -1,5 +1,10 @@
+import os
 import streamlit as st
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage
+## faulty error warning here
+from llama_index.core import StorageContext, load_index_from_storage
+import subprocess
+
+os.environ['OPENAI_API_KEY'] = st.secrets["OPENAI_API_KEY"]
 
 st.header("Chat with Chip!")
 
@@ -29,7 +34,7 @@ for message in st.session_state.messages: # Display the prior chat messages
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = chat_engine.chat(prompt)
+            response = chat_engine.chat(prompt + "Preface the answer with the File Name and Page Number.")
             st.write(response.response)
             message = {"role": "assistant", "content": response.response}
             st.session_state.messages.append(message) # Add response to message history
