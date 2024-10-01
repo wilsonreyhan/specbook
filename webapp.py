@@ -13,7 +13,7 @@ if "messages" not in st.session_state.keys(): # Initialize the chat message hist
         {"role": "assistant", "content": "Ask me a question about IDOT's Specifications!"}
     ]
 
-@st.cache_resource(show_spinner=True)
+@st.cache_resource(show_spinner=False)
 def load_data():
     with st.spinner(text="Loading IDOT specs... Hang tight - this should only take 1 minute!"):
         PERSIST_DIR = "./storage"
